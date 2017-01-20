@@ -8,8 +8,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.CharBuffer;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import ru.pricechecker.main.FileReader.LoadData;
 
@@ -18,6 +21,7 @@ public class TCPServer {
 	public static final String ERRORS_SERVER_PORT_BUSY = "Server port is busy: ";
 	public static final String ERRORS_UNKNOWN = "Unknown server error: ";
 	public static final String ERROR_PORT_CONNECTION = "Port connection error: ";
+	private static final int WAIT_RESPONSE_WRITE = 200;
 	
 	private volatile boolean isServerOpen = false;
 	private volatile boolean isServerRunning = false;
@@ -54,6 +58,7 @@ public class TCPServer {
 			isServerRunning = true;	
 		    while(isServerRunning){
 		        try {
+		        	FileReader.asyncCheckFile();
 					Socket clientSocket = serverSocket.accept();
 					new ClientServiceThread(clientSocket).start();
 				} catch (IOException e) {
@@ -106,11 +111,11 @@ public class TCPServer {
 	         try { 
 	            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	            out = clientSocket.getOutputStream();
-	            
+	            	           	            
 	            // Client barcode
-	            String clientBarcode = in.readLine(); 
+	            String dataFromDevice = in.readLine();
 	            // Handle request data
-	            List<String> requestInfo = PriceCheckerUtil.handleCheckerRequest(clientBarcode, clientSocket.getInetAddress().getHostAddress());   
+	            List<String> requestInfo = PriceCheckerUtil.handleCheckerRequest(dataFromDevice, clientSocket.getInetAddress().getHostAddress());   
             	// Search in file array
 	            LoadData item = FileReader.getItem(requestInfo.get(PriceCheckerUtil.POSITION_BARCODE));            
 	            // Get return data
@@ -118,17 +123,20 @@ public class TCPServer {
 	            // Write bytes to device
 	            out.write(returnData);
 	            out.flush(); 
-	               
+	            	                      
+	            // Wait response. This wrong, must receive response from device!
+	            Thread.sleep(WAIT_RESPONSE_WRITE);
+	            
 	         } catch(Exception e) { 
 	        	 FileLogging.toLog(TCPServer.class.getSimpleName() + " - ClientServiceThread: " + e.getMessage());
 	         } finally { 
-//	            try { 
-//	               in.close(); 
-//	               out.close(); 
-//	               clientSocket.close();  
-//	            } catch(IOException ioe) { 
-//	            	FileLogging.toLog(TCPServer.class.getSimpleName() + " - ClientServiceThread: " + ioe.getMessage());
-//	            } 
+	            try { 
+	               out.close();
+	               in.close(); 
+	               clientSocket.close();  
+	            } catch(IOException ioe) { 
+	            	FileLogging.toLog(TCPServer.class.getSimpleName() + " - ClientServiceThread: " + ioe.getMessage());
+	            } 
 	         } 
 	      } 
 	   } 

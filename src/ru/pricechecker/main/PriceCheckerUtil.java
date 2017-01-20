@@ -14,6 +14,9 @@ public class PriceCheckerUtil {
 	public static final int POSITION_BARCODE = 0;
 	public static final int POSITION_IP = 1;
 		
+	private static final String MESSAGE_NOT_FOUND_1 = "Товар не найден!";
+	private static final String MESSAGE_NOT_FOUND_2 = "Обновите выгрузку...";
+	
 	private static final String MARK_COST = "Цена: "; 
 	private static final String MARK_COUNT = "Кол-во: ";
 	private static final String MARK_SPACE = "  ";
@@ -48,40 +51,50 @@ public class PriceCheckerUtil {
 			
 			// Preferences
 			// Command
-			answer[0] = new Integer(174).byteValue();
+			answer[0] = (byte)0xAE;
 			// Output time on checker screen
-			answer[1] = new Integer(50).byteValue();
+			answer[1] = (byte)50;
 			// String length. Default 80
-			answer[2] = new Integer(80).byteValue();
+			answer[2] = (byte)80;
 			// Type screen output. Running or static
-			answer[3] = new Integer(34).byteValue();
+			answer[3] = (byte)0xF2;
 			// Speed of first string
-			answer[4] = new Integer(1).byteValue();
+			answer[4] = (byte)1;
 			// Speed of second string
-			answer[5] = new Integer(5).byteValue();
+			answer[5] = (byte)5;
 			// Message priority. 5 is highest.
-			answer[6] = new Integer(5).byteValue();   			
+			answer[6] = (byte)5;   			
 			// Length of first string. Max - 40
-			answer[7] = new Integer(40).byteValue(); 
+			answer[7] = (byte)40; 
 			// Length of second string. Max - 40
-			answer[8] = new Integer(40).byteValue(); 
+			answer[8] = (byte)40; 
 			
 			// Reserve 4 bytes
-			answer[9] = new Integer(0).byteValue(); 
-			answer[10] = new Integer(0).byteValue(); 
-			answer[11] = new Integer(0).byteValue(); 
-			answer[12] = new Integer(0).byteValue();
+			answer[9] = (byte)0; 
+			answer[10] = (byte)0; 
+			answer[11] = (byte)0; 
+			answer[12] = (byte)0;
+				
+			// Set strings
+			String firstString = "";
+			String secondString = "";
+			if(returnData != null){
+				firstString = returnData.getName();
+				secondString = MARK_COST + returnData.getCost() + MARK_SPACE + MARK_COUNT + returnData.getCount();
+			} else {
+				firstString = MESSAGE_NOT_FOUND_1;
+				secondString = MESSAGE_NOT_FOUND_2;
+			}
 			
 			// Fill first string
-			byte [] convertedFirstString = returnData.getName().getBytes("cp1251");
+			byte [] convertedFirstString = firstString.getBytes("cp1251");
 			// Start from 13's byte
 			for(int i = 0, j = 13; i < convertedFirstString.length && j < 53; i++, j++){
 				answer[j] = convertedFirstString[i];
 			}    				
 			 			
 			// Fill second string
-			String secondString = MARK_COST + returnData.getCost() + MARK_SPACE + MARK_COUNT + returnData.getCount(); 
-			byte [] convertedSecondString = secondString.getBytes("cp1251");
+			byte [] convertedSecondString = secondString.getBytes("cp1251");;
 			// Start from 53's byte
 			for(int i = 0, j = 53; i < convertedSecondString.length && j < answer.length; i++, j++){
 				answer[j] = convertedSecondString[i];
