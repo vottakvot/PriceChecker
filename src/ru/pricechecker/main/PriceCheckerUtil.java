@@ -17,8 +17,8 @@ public class PriceCheckerUtil {
 	private static final String MESSAGE_NOT_FOUND_1 = "Товар не найден!";
 	private static final String MESSAGE_NOT_FOUND_2 = "Обновите выгрузку...";
 	
-	private static final String MARK_COST = "Цена: "; 
-	private static final String MARK_COUNT = "Кол-во: ";
+	private static final String MARK_COST = "Ц: "; 
+	private static final String MARK_COUNT = "К: ";
 	private static final String MARK_SPACE = "  ";
 		
 	public static List<String> handleCheckerRequest(String request, String ip){		
@@ -59,9 +59,9 @@ public class PriceCheckerUtil {
 			// Type screen output. Running or static
 			answer[3] = (byte)0xF2;
 			// Speed of first string
-			answer[4] = (byte)1;
+			answer[4] = (byte)2;
 			// Speed of second string
-			answer[5] = (byte)5;
+			answer[5] = (byte)3;
 			// Message priority. 5 is highest.
 			answer[6] = (byte)5;   			
 			// Length of first string. Max - 40

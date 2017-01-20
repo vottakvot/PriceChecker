@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings>
+  <delimeter>;</delimeter>
+  <file>D:\\path.txt</file>
+  <port>2004</port>
+</Settings>

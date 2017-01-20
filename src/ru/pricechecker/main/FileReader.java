@@ -12,13 +12,16 @@ public class FileReader {
 
 	public static final String ERROR_STRING_FORMAT = "Wrong format of string: ";
 	public static final String ERROR_BARCODE_NOT_FOUND = "Barcode not found: ";
-	public static final String LINE_SEPARATOR = ";";
+	public static final String LINE_DELIMETER = ";";
 	
 	private static Map<String, LoadData> fileData = null;
 	private static String path = null;
 	private static long lastFileModification = 0;
+	private static String currentDelimeter = LINE_DELIMETER;
 	
-	public static boolean readFile(String path){
+	public static boolean readFile(String path, String delimeter){
+		// Set user delimeter
+		currentDelimeter = delimeter != null? delimeter : LINE_DELIMETER;
 		// Save path for interval's checking
 		FileReader.path = path;
 		File dataFile = new File(path);
@@ -41,7 +44,7 @@ public class FileReader {
 		    int i = 0;
 	        while(scanner.hasNextLine()){
 	        	String initString = scanner.nextLine();
-	        	String[] oneString = initString.split(LINE_SEPARATOR);
+	        	String[] oneString = initString.split(currentDelimeter);
 	        	++i;
 	        	
 	        	// String must contain 4 part!
@@ -94,7 +97,7 @@ public class FileReader {
 					File dataFile = new File(FileReader.path);
 					BasicFileAttributes attributes = Files.readAttributes(dataFile.toPath(), BasicFileAttributes.class);
 					if(FileReader.lastFileModification != attributes.lastModifiedTime().toMillis()){
-						FileReader.readFile(FileReader.path);
+						FileReader.readFile(FileReader.path, FileReader.currentDelimeter);
 					}
 					
 				} catch (Exception e) {
