@@ -1,0 +1,16 @@
+20.01.2017-11:59:48:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-11:59:48:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:00:53:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:00:53:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:02:43:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:02:43:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:10:32:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:10:32:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:15:12:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:15:12:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:16:29:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:16:29:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:17:28:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:17:28:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
+20.01.2017-12:18:00:  FileReader - readFile: Wrong format of string: 6
+20.01.2017-12:18:00:  FileReader - readFile: 2501503;Сахар-рафинад Тамбов;37.10
