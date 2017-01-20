@@ -21,7 +21,7 @@ public class Main {
 		
 		// Load check data from file	
 		if(FileReader.readFile(arguments.get(FileSettings.ARG_FILE_PATH), arguments.get(FileSettings.ARG_DELIMETER))){
-			TCPServer tcpServer = new TCPServer(Integer.getInteger(arguments.get(FileSettings.ARG_PORT)));
+			TCPServer tcpServer = new TCPServer(Integer.parseInt(arguments.get(FileSettings.ARG_PORT)));
 			if(tcpServer.startServer()){
 				System.out.println("Обработка сообщений...");
 				tcpServer.startRequestHandle();
