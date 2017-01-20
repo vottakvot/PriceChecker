@@ -7,6 +7,7 @@ public class Main {
 
 		FileLogging.toLog("sdfsdfsdfsdf");
 		FileLogging.toLog("sdfsfhghgjah");
+		FileLogging.toLog("sdfsfhghgjah");
 	}
 
 }
