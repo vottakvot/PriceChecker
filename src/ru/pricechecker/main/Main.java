@@ -14,10 +14,10 @@ public class Main {
 				printHelp();
 				System.exit(1);
 			}
-		} 
-		
-		// Set new settings
-		FileSettings.writeToFile(arguments);
+		} else {
+			// Set new settings
+			FileSettings.writeToFile(arguments);
+		}
 		
 		// Load check data from file	
 		if(FileReader.readFile(arguments.get(FileSettings.ARG_FILE_PATH), arguments.get(FileSettings.ARG_DELIMETER))){
