@@ -3,7 +3,6 @@
 Eclipse+TCP+JDOM2
 ```
 
-
 ## About
 ``` groovy
 This app is TCP server for Shtrih-M PriceChecker device. 
@@ -50,12 +49,9 @@ Use follow commmand: AEh for load 2 string message;
       --port - port for exchange;
       
       --delimeter - for fields;
+      
+      
+## Notice
  
- 
- 
- ## Notice
- 
- 	* If there are no arguments, app use config file CONFIG.xml, else exit.
-	
-	* Bug, don't work running strings!
- 
+      - If there are no arguments, app use config file CONFIG.xml, else exit.-
+      - Bug, don't work running strings!
