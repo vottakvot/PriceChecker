@@ -53,5 +53,5 @@ Use follow commmand: AEh for load 2 string message;
       
 ## Notice
  
-      - If there are no arguments, app use config file CONFIG.xml, else exit.-
+      - If there are no arguments, app use config file CONFIG.xml, else exit.
       - Bug, don't work running strings!
