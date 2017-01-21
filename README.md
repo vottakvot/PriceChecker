@@ -11,7 +11,7 @@ Exchange with the device takes place according to the TCP protocol.
 Use follow commmand: AEh for load 2 string message;
 ```
 
-<b><u>Example:</u></b> 
+<b>Example:</b> 
       
       ...
       // Command
@@ -43,7 +43,7 @@ Use follow commmand: AEh for load 2 string message;
       ...
       
       
- <b><u>Input argumets:</u></b> 
+ <b>Input argumets:</b> 
  
       --file - path to data file;
       
@@ -52,3 +52,6 @@ Use follow commmand: AEh for load 2 string message;
       --delimeter - for fields;
  
  
+ ``` groovy
+ If there are no arguments, app use config file CONFIG.xml, else exit.
+  ```
