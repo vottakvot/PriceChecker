@@ -2,9 +2,7 @@ package ru.pricechecker.main;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -12,12 +10,32 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author USER
+ *
+ */
 public class FileLogging {
 	
+	/**
+	 * Log file name
+	 */
 	private static final String FILE_NAME = "PriceChecker-log.txt";
+	
+	/**
+	 *  Log file path
+	 */
 	private static String filePath = "";
+	
+	/**
+	 * For internal state
+	 */
 	private static String internalError = "";
 	
+	/**
+	 * Write message to file log
+	 * @param strinToFile message for logging
+	 * @return true or false logging successful
+	 */
 	public static boolean toLog(String strinToFile){
 		PrintWriter out = null;
 		try {
@@ -65,10 +83,16 @@ public class FileLogging {
 		return true;
 	}
 	
+	/**
+	 * @return path to log file
+	 */
 	public static String getFilePath() {
 		return filePath;
 	}
 	
+	/**
+	 * @return get internal error of logging
+	 */
 	public static String getInternalError() {
 		return internalError;
 	}

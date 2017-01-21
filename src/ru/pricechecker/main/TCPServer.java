@@ -4,35 +4,69 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.CharBuffer;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 import ru.pricechecker.main.FileReader.LoadData;
 
+/**
+ * @author USER
+ *
+ */
 public class TCPServer {
 
+	/**
+	 *    Message for error
+	 */
 	public static final String ERRORS_SERVER_PORT_BUSY = "Server port is busy: ";
+	
+	/**
+	 *   Message for error
+	 */
 	public static final String ERRORS_UNKNOWN = "Unknown server error: ";
+	
+	/**
+	 *   Message for error
+	 */
 	public static final String ERROR_PORT_CONNECTION = "Port connection error: ";
+	
+	/**
+	 *   Delay before close connection
+	 */
 	private static final int WAIT_RESPONSE_WRITE = 200;
 	
+	/**
+	 * For check server open
+	 */
 	private volatile boolean isServerOpen = false;
+	
+	/**
+	 * For check server running
+	 */
 	private volatile boolean isServerRunning = false;
+	
+	/**
+	 * Open socket
+	 */
 	private ServerSocket serverSocket = null;
+	
+	/**
+	 * Server port
+	 */
 	private int port;
 	
+	/**
+	 * @param port for open
+	 */
 	public TCPServer(int port){
 		this.port = port;
 	}
 	
-	// For server start
+	/**
+	 * For server start
+	 * @return true or false if successful
+	 */
 	public boolean startServer(){
 		// Try open current port
 		try {
@@ -51,7 +85,9 @@ public class TCPServer {
 		return true;
 	}
 	
-	// For server handle
+	/**
+	 * For server handle
+	 */
 	public void startRequestHandle(){
 		// Get connections
 		try {
@@ -71,7 +107,9 @@ public class TCPServer {
 		}
 	}
 	
-	// For server stop
+	/**
+	 * For server stop
+	 */
 	public void stopServer(){
 		try {
 			serverSocket.close();
@@ -82,19 +120,33 @@ public class TCPServer {
 		}
 	}
 	
+	/**
+	 * @return true or false server run
+	 */
 	public boolean isServerRunning() {
 		return isServerRunning;
 	}
 
+	/**
+	 * @param isServerRunning set for server stop
+	 */
 	public void setServerRunning(boolean isServerRunning) {
 		this.isServerRunning = isServerRunning;
 	}
 	
+	/**
+	 * @return true or false server open
+	 */
 	public boolean isServerOpen() {
 		return isServerOpen;
 	}
 	
 
+	/**
+	 * Handle and receive result in separate thread
+	 * @author USER
+	 *
+	 */
 	class ClientServiceThread extends Thread { 
 	      private Socket clientSocket;
 	      			

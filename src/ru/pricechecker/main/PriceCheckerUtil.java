@@ -1,26 +1,56 @@
 package ru.pricechecker.main;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.annotation.Documented;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ru.pricechecker.main.FileReader.LoadData;
 
+/**
+ * @author USER
+ *
+ */
 public class PriceCheckerUtil {
 
+	/**
+	 * Position in list for barcode
+	 */
 	public static final int POSITION_BARCODE = 0;
+	
+	/**
+	 *  Position in list for ip
+	 */
 	public static final int POSITION_IP = 1;
 		
+	/**
+	 *  Message for error
+	 */
 	private static final String MESSAGE_NOT_FOUND_1 = "Товар не найден!";
+	
+	/**
+	 *  Message for error
+	 */
 	private static final String MESSAGE_NOT_FOUND_2 = "Обновите выгрузку...";
 	
+	/**
+	 *  For display on device
+	 */
 	private static final String MARK_COST = "Ц: "; 
+	
+	/**
+	 *  For display on device
+	 */
 	private static final String MARK_COUNT = "К: ";
+	
+	/**
+	 *  For display on device
+	 */
 	private static final String MARK_SPACE = "  ";
 		
+	/**
+	 * @param request barcode from device
+	 * @param ip ip from device
+	 * @return normalize data
+	 */
 	public static List<String> handleCheckerRequest(String request, String ip){		
 		try {
 			// Handle data
@@ -40,6 +70,10 @@ public class PriceCheckerUtil {
 	}
 	
 	
+	/**
+	 * @param returnData data for convert
+	 * @return converted data
+	 */
 	public static byte[] getCheckerDataForTwoString(LoadData returnData){
 		try {
 			// For two strings, return data must be 91 bytes

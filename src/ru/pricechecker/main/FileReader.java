@@ -8,20 +8,55 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author USER
+ *
+ */
 public class FileReader {
 
+	/**
+	 * Message for error
+	 */
 	public static final String ERROR_STRING_FORMAT = "Wrong format of string: ";
+	
+	/**
+	 * Message for error
+	 */
 	public static final String ERROR_BARCODE_NOT_FOUND = "Barcode not found: ";
-	public static final String LINE_DELIMETER = ";";
 	
+	/**
+	 * Default delimiter
+	 */
+	public static final String LINE_DELIMITER = ";";
+	
+	/**
+	 * Content data
+	 */
 	private static Map<String, LoadData> fileData = null;
-	private static String path = null;
-	private static long lastFileModification = 0;
-	private static String currentDelimeter = LINE_DELIMETER;
 	
-	public static boolean readFile(String path, String delimeter){
+	/**
+	 * Path to data file
+	 */
+	private static String path = null;
+	
+	/**
+	 * Mark for last file update
+	 */
+	private static long lastFileModification = 0;
+	
+	/**
+	 * Delimiter for fields
+	 */
+	private static String currentDelimeter = LINE_DELIMITER;
+	
+	/**
+	 * @param path from read content data
+	 * @param delimiter for fields
+	 * @return true or false if successful
+	 */
+	public static boolean readFile(String path, String delimiter){
 		// Set user delimeter
-		currentDelimeter = delimeter != null? delimeter : LINE_DELIMETER;
+		currentDelimeter = delimiter != null? delimiter : LINE_DELIMITER;
 		// Save path for interval's checking
 		FileReader.path = path;
 		File dataFile = new File(path);
@@ -77,6 +112,10 @@ public class FileReader {
 		return fileData != null && fileData.size() > 0? true : false;
 	}
 	
+	/**
+	 * @param barcode for search
+	 * @return data for current barcode
+	 */
 	public static LoadData getItem(String barcode){
 		try {
 			LoadData item = fileData.get(barcode.trim());
@@ -88,6 +127,9 @@ public class FileReader {
 		}
 	}
 	
+	/**
+	 * For asynchronous update content data, if file was update
+	 */
 	public static void asyncCheckFile(){
 		// Separate thread for load new data
 		Thread checkThread = new Thread(new Runnable() {
@@ -110,11 +152,18 @@ public class FileReader {
 		checkThread.start();
 	}
 	
+	/**
+	 * @return current content data or null
+	 */
 	public static Map<String, LoadData> getFileData(){
 		return fileData;
 	}
 
 	
+	/**
+	 * Data for internal exchange
+	 * @author USER
+	 */
 	public static class LoadData {
 		
 		private String name;

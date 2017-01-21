@@ -11,15 +11,41 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+/**
+ * @author USER
+ *
+ */
 public class FileSettings {
 	
+	/**
+	 * Argument for data file path
+	 */
 	public static final String ARG_FILE_PATH = "--file";
+	
+	/**
+	 * Argument for port
+	 */
 	public static final String ARG_PORT = "--port";
-	public static final String ARG_DELIMETER = "--delimeter";
+	
+	/**
+	 * Argument for fields delimiter
+	 */
+	public static final String ARG_DELIMITER = "--delimiter";
 		
+	/**
+	 * Name for file config
+	 */
 	private static final String CONFIG_FILE_NAME = "CONFIG.xml";
+	
+	/**
+	 * Root tag for file config
+	 */
 	private static final String TAG_ROOT = "Settings";
 	
+	/**
+	 * @param settings setting for write to config file
+	 * @return true  or false if success
+	 */
 	public static boolean writeToFile(Map<String, String> settings) {
 		try {
 			// Set root tag
@@ -46,6 +72,9 @@ public class FileSettings {
 		return true;
 	}
 
+	/**
+	 * @return config data
+	 */
 	public static Map<String, String> readFromFile() {
 		try {
 			File fileSettings = new File(getDefaultPath());		      
@@ -68,8 +97,8 @@ public class FileSettings {
 					arguments.put(ARG_FILE_PATH, currentSetting.getValue());
 				
 				// Delimeter
-				if(ARG_DELIMETER.contains(currentSetting.getName()))
-					arguments.put(ARG_DELIMETER, currentSetting.getValue());
+				if(ARG_DELIMITER.contains(currentSetting.getName()))
+					arguments.put(ARG_DELIMITER, currentSetting.getValue());
 				
 				// Port
 				if(ARG_PORT.contains(currentSetting.getName()))
@@ -83,6 +112,9 @@ public class FileSettings {
 		}
 	}
 	
+	/**
+	 * @return path to config file
+	 */
 	private static String getDefaultPath(){
 		return System.getProperty("user.dir") + File.separator + CONFIG_FILE_NAME;
 	} 

@@ -20,7 +20,7 @@ public class Main {
 		}
 		
 		// Load check data from file	
-		if(FileReader.readFile(arguments.get(FileSettings.ARG_FILE_PATH), arguments.get(FileSettings.ARG_DELIMETER))){
+		if(FileReader.readFile(arguments.get(FileSettings.ARG_FILE_PATH), arguments.get(FileSettings.ARG_DELIMITER))){
 			TCPServer tcpServer = new TCPServer(Integer.parseInt(arguments.get(FileSettings.ARG_PORT)));
 			if(tcpServer.startServer()){
 				System.out.println("Обработка сообщений...");
@@ -43,7 +43,7 @@ public class Main {
 			Map<String, String> argsContainer = new HashMap<>();
 			for(int i = 0; i < args.length; i++){
 				// If this key for argument
-				if(args[i].equals(FileSettings.ARG_FILE_PATH) || args[i].equals(FileSettings.ARG_PORT) || args[i].equals(FileSettings.ARG_DELIMETER))
+				if(args[i].equals(FileSettings.ARG_FILE_PATH) || args[i].equals(FileSettings.ARG_PORT) || args[i].equals(FileSettings.ARG_DELIMITER))
 					argsContainer.put(args[i], args[i + 1]);
 			}
 					
@@ -61,7 +61,7 @@ public class Main {
 		System.out.println("Ключи:");
 		System.out.println("	" + FileSettings.ARG_FILE_PATH + " - путь к данным");
 		System.out.println("	" + FileSettings.ARG_PORT + " - порт для обмена");
-		System.out.println("	" + FileSettings.ARG_DELIMETER + " - разделитель полей");
+		System.out.println("	" + FileSettings.ARG_DELIMITER + " - разделитель полей");
 		System.out.println("");
 		System.out.println("Пример:	PriceChecker.exe --file \"C:\\datafile.txt\" --port 2004");
 		System.out.println("");
