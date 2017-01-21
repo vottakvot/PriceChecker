@@ -48,7 +48,7 @@ Use follow commmand: AEh for load 2 string message;
       
       --port - port for exchange;
       
-      --delimeter - for fields;
+      --delimiter - for fields;
       
       
 ## Notice
