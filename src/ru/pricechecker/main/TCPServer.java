@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ru.pricechecker.main.FileReader.LoadData;
@@ -168,7 +170,11 @@ public class TCPServer {
 	            String dataFromDevice = in.readLine();
 	            // Handle request data
 	            List<String> requestInfo = PriceCheckerUtil.handleCheckerRequest(dataFromDevice, clientSocket.getInetAddress().getHostAddress());   
-            	// Search in file array
+            	// Output for visual
+	            System.out.println(	"TIME: " + new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss").format(new Date()) + " - " + 
+	            					"IP: " + requestInfo.get(PriceCheckerUtil.POSITION_IP) + "; " + 
+	            					"BARCODE: " + requestInfo.get(PriceCheckerUtil.POSITION_BARCODE)  + ";"); 
+	            // Search in file array
 	            LoadData item = FileReader.getItem(requestInfo.get(PriceCheckerUtil.POSITION_BARCODE));            
 	            // Get return data
 	            byte[] returnData = PriceCheckerUtil.getCheckerDataForTwoString(item);
