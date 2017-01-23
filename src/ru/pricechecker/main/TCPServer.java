@@ -170,18 +170,19 @@ public class TCPServer {
 	            String dataFromDevice = in.readLine();
 	            // Handle request data
 	            List<String> requestInfo = PriceCheckerUtil.handleCheckerRequest(dataFromDevice, clientSocket.getInetAddress().getHostAddress());   
+	            // Search in file array
+	            LoadData item = FileReader.getItem(requestInfo.get(PriceCheckerUtil.POSITION_BARCODE));    
             	// Output for visual
+	            String itemName = item != null? item.getName() : PriceCheckerUtil.MESSAGE_NOT_FOUND_1;
 	            System.out.println(	"TIME: " + new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss").format(new Date()) + " - " + 
 	            					"IP: " + requestInfo.get(PriceCheckerUtil.POSITION_IP) + "; " + 
-	            					"BARCODE: " + requestInfo.get(PriceCheckerUtil.POSITION_BARCODE)  + ";"); 
-	            // Search in file array
-	            LoadData item = FileReader.getItem(requestInfo.get(PriceCheckerUtil.POSITION_BARCODE));            
+	            					"BARCODE: " + requestInfo.get(PriceCheckerUtil.POSITION_BARCODE)  + "; " + 
+	            					"NAME: " + itemName + ";"); 
 	            // Get return data
 	            byte[] returnData = PriceCheckerUtil.getCheckerDataForTwoString(item);
 	            // Write bytes to device
 	            out.write(returnData);
-	            out.flush(); 
-	            	                      
+	            out.flush();                
 	            // Wait response. This wrong, must receive response from device!
 	            Thread.sleep(WAIT_RESPONSE_WRITE);
 	            

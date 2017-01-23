@@ -24,7 +24,7 @@ public class PriceCheckerUtil {
 	/**
 	 *  Message for error
 	 */
-	private static final String MESSAGE_NOT_FOUND_1 = "Товар не найден!";
+	public static final String MESSAGE_NOT_FOUND_1 = "Товар не найден!";
 	
 	/**
 	 *  Message for error

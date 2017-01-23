@@ -139,7 +139,9 @@ public class FileReader {
 					File dataFile = new File(FileReader.path);
 					BasicFileAttributes attributes = Files.readAttributes(dataFile.toPath(), BasicFileAttributes.class);
 					if(FileReader.lastFileModification != attributes.lastModifiedTime().toMillis()){
-						FileReader.readFile(FileReader.path, FileReader.currentDelimeter);
+						if(FileReader.readFile(FileReader.path, FileReader.currentDelimeter)){
+							FileReader.lastFileModification = attributes.lastModifiedTime().toMillis();
+						}
 					}
 					
 				} catch (Exception e) {
