@@ -19,7 +19,7 @@ public class Main {
 			FileSettings.writeToFile(arguments);
 		}
 		
-		// Load check data from file	
+		// Load check data from file
 		if(FileReader.readFile(arguments.get(FileSettings.ARG_FILE_PATH), arguments.get(FileSettings.ARG_DELIMITER))){
 			TCPServer tcpServer = new TCPServer(Integer.parseInt(arguments.get(FileSettings.ARG_PORT)));
 			if(tcpServer.startServer()){
